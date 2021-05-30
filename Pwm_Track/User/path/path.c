@@ -6,6 +6,26 @@
 
 extern __IO uint16_t Left_Scan;
 extern __IO uint16_t Go_Scan;
+
+
+
+void EXTI0(void) //按键1
+{
+		if(Go_Scan!=1)
+		{
+			SysTick_Delay_Ms(1);
+			Turn_Left_Slow();
+			SysTick_Delay_Ms(1850);
+		}
+}
+
+
+void EXTI13(void) //按键2
+{
+		SysTick_Delay_Ms(1);
+		Go();
+		SysTick_Delay_Ms(700);
+}
 	
 void Track(void)
 {
@@ -27,6 +47,7 @@ void Track(void)
 		do{
 			SysTick_Delay_Ms(1);
 			Turn_Left_Slow();
+			SysTick_Delay_Ms(1850);
 		}while(L1==0 && L2==0 && L3==0 && L4==1 && L5==0 && L6==0 && L7==0);
 		Left_Scan += 1;
 	}
@@ -51,16 +72,10 @@ void Track(void)
 	//右转
 	else if(L1==0 && L2==0 && L3==0 && L4==1 && L5==1 && L6==1 && L7==1)
 	{
-		uint16_t i=0;
-		while(i<=1)
-		{
-			do{
 				SysTick_Delay_Ms(1);
 				Turn_Right_Slow();
-			}while(L4==1);
-			i++;
-			SysTick_Delay_Ms(700);
-		}
+				SysTick_Delay_Ms(1850);
+		
 	}
 	
 	
@@ -69,17 +84,17 @@ void Track(void)
 	
 	//位置纠正
 	//左纠正
-	else if((L1==0 && L2==1 && L3==1 && L4==1 && L5==0 && L6==0 && L7==0) || (L1==0 && L2==0 && L3==1 && L4==1 && L5==0 && L6==0 && L7==0) || (L1==0 && L2==0 && L3==1 && L4==0 && L5==0 && L6==0 && L7==0) || (L1==0 && L2==1 && L3==1 && L4==0 && L5==0 && L6==0 && L7==0))
+	else if((L1==0 && L2==1 && L3==1 && L4==1 && L5==0 && L6==0 && L7==0) || (L1==0 && L2==0 && L3==1 && L4==1 && L5==0 && L6==0 && L7==0) || (L1==0 && L2==1 && L3==0 && L4==1 && L5==0 && L6==0 && L7==0) || (L1==0 && L2==1 && L3==1 && L4==0 && L5==0 && L6==0 && L7==0) || (L1==0 && L2==0 && L3==1 && L4==0 && L5==0 && L6==0 && L7==0) || (L1==0 && L2==0 && L3==1 && L4==0 && L5==0 && L6==0 && L7==0))
 	{
 		SysTick_Delay_Ms(1);
-		Turn_Left_Slow();
+		Turn_Left_Correct();
 	}
 	
 	//右纠正
-	else if((L1==0 && L2==0 && L3==0 && L4==1 && L5==1 && L6==1 && L7==0) || (L1==0 && L2==0 && L3==0 && L4==1 && L5==1 && L6==0 && L7==0) || (L1==0 && L2==0 && L3==0 && L4==0 && L5==1 && L6==0 && L7==0) || (L1==0 && L2==0 && L3==0 && L4==0 && L5==1 && L6==1 && L7==0))
+	else if((L1==0 && L2==0 && L3==0 && L4==1 && L5==1 && L6==1 && L7==0) || (L1==0 && L2==0 && L3==0 && L4==0 && L5==1 && L6==1 && L7==0) || (L1==0 && L2==0 && L3==0 && L4==1 && L5==0 && L6==1 && L7==0) || (L1==0 && L2==0 && L3==0 && L4==1 && L5==1 && L6==0 && L7==0) || (L1==0 && L2==0 && L3==0 && L4==0 && L5==0 && L6==1 && L7==0) || (L1==0 && L2==0 && L3==0 && L4==0 && L5==1 && L6==0 && L7==0))
 	{
 		SysTick_Delay_Ms(1);
-		Turn_Right_Slow();
+		Turn_Right_Correct();
 	}
 	
 	
@@ -111,17 +126,17 @@ void Track(void)
 	
 	
 	//扫描不到任何物体检测
-	else if(L1==0 && L2==0 && L3==0 && L4==0 && L5==0 && L6==0 && L7==0)
-	{
-		SysTick_Delay_Ms(1);
-		Turn_Left_Slow();
-	
-		if(L1==0 && L2==0 && L3==0 && L4==0 && L5==0 && L6==0 && L7==0)
-		{
-			SysTick_Delay_Ms(1);
-			Stop();
-		}
-	}
+//	else if(L1==0 && L2==0 && L3==0 && L4==0 && L5==0 && L6==0 && L7==0)
+//	{
+//		SysTick_Delay_Ms(1);
+//		Turn_Left_Slow();
+//	
+//		if(L1==0 && L2==0 && L3==0 && L4==0 && L5==0 && L6==0 && L7==0)
+//		{
+//			SysTick_Delay_Ms(1);
+//			Stop();
+//		}
+//	}
 	
 	else
 	{

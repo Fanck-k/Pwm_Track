@@ -14,8 +14,8 @@
 
 
 void Track(void);
-
-
+void EXTI0(void);
+void EXTI13(void);
 
 
 

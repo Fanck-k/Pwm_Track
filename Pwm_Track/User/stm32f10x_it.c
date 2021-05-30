@@ -29,6 +29,9 @@
 #include "path.h"
 #include "bsp_led.h"
 #include "breath.h"
+#include "bsp_systick.h"
+#include "path.h"
+
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
   */
@@ -219,6 +222,30 @@ void SysTick_Handler(void)
 // }
 //}
 
+
+
+extern __IO uint16_t Go_Scan;
+
+void EXTI0_IRQHandler(void)
+{
+	if(EXTI_GetITStatus(EXTI_Line0) != RESET)
+	{
+		EXTI0();	
+	}
+	EXTI_ClearITPendingBit(EXTI_Line0);
+}
+
+
+
+
+void EXTI15_10_IRQHandler(void)
+{
+	if(EXTI_GetITStatus(EXTI_Line13) != RESET)
+	{
+		EXTI13();
+	}
+	EXTI_ClearITPendingBit(EXTI_Line13);
+}
 
 
 

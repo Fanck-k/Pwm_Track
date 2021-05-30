@@ -91,5 +91,7 @@ void Turn_Left_Slow(void);
 //void Turn_Right_Fast(void);
 //void Turn_Left_Fast(void);
 void Stop(void);
+void Turn_Right_Correct(void);
+void Turn_Left_Correct(void);
 
 #endif /* __LED_H */
