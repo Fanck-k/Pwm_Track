@@ -23,7 +23,7 @@
   * @param  无
   * @retval 无
   */
-	extern u16 speed_left;//左侧速度初值
+extern u16 speed_left;//左侧速度初值
 extern u16 speed_right;//右侧速度初值
 
 
@@ -110,7 +110,7 @@ void Turn_Right_Slow(void)
 	WHEEL0_ON;
 	WHEEL1_OFF;
 	WHEEL2_OFF;
-	WHEEL3_ON;
+	WHEEL3_OFF;
 	
 }
 
@@ -119,7 +119,7 @@ void Turn_Left_Slow(void)
 	Set_Left_Speed(300);
 	Set_Right_Speed(300);
 	WHEEL0_OFF;
-	WHEEL1_ON;
+	WHEEL1_OFF;
 	WHEEL2_ON;
 	WHEEL3_OFF;
 	
@@ -128,7 +128,7 @@ void Turn_Left_Slow(void)
 void Turn_Right_Correct(void)
 {
 	Set_Left_Speed(560);
-	Set_Right_Speed(700);
+	Set_Right_Speed(1000);
 	WHEEL0_ON;
 	WHEEL1_OFF;
 	WHEEL2_ON;
@@ -137,7 +137,7 @@ void Turn_Right_Correct(void)
 
 void Turn_Left_Correct(void)
 {
-	Set_Left_Speed(700);
+	Set_Left_Speed(1000);
 	Set_Right_Speed(560);
 	WHEEL0_ON;
 	WHEEL1_OFF;

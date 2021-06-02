@@ -14,9 +14,7 @@
 
 
 void Track(void);
-void EXTI0(void);
-void EXTI13(void);
-
+static void delay(uint16_t i);
 
 
 #endif /*__PATH_H*/

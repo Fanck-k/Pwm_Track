@@ -65,7 +65,7 @@ static __INLINE uint32_t SysTick_Config(uint32_t ticks)
   SysTick->LOAD  = (ticks & SysTick_LOAD_RELOAD_Msk) - 1;
 	
 	// 配置中断优先级为 1<<4-1 = 15，优先级为最低
-  NVIC_SetPriority (SysTick_IRQn, (1<<__NVIC_PRIO_BITS) - 1); 
+  NVIC_SetPriority (SysTick_IRQn, 0); 
 	
 	// 配置 counter 计数器的值
   SysTick->VAL   = 0;

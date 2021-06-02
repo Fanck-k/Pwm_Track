@@ -30,7 +30,7 @@
 #include "bsp_led.h"
 #include "breath.h"
 #include "bsp_systick.h"
-#include "path.h"
+#include "bsp_exti.h"
 
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
@@ -142,6 +142,7 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
+	TimingDelay_Decrement();
 }
 
 /******************************************************************************/
@@ -164,89 +165,32 @@ void SysTick_Handler(void)
   * @}
   */ 
 
-//extern uint16_t indexWave[];
-//extern uint16_t off[];
-
-///* 呼吸灯中断服务函数 */
-//void BRE_TIMx_IRQHandler(void)
-//{ 
-//	//白天变量
-//	static uint16_t pwm_index = 0;   //用于PWM查表
-//	static uint16_t period_cnt = 0;  //用于计算周期数
-//	
-//	//夜间变量
-//	static uint16_t pwm_index1 = 0;   //用于PWM查表
-//	static uint16_t period_cnt1 = 0;  //用于计算周期数
-// 
-// if (TIM_GetITStatus(BRE_TIMx, TIM_IT_Update) != RESET) //TIM_IT_Update
-//  {  
-//		//白天效果
-//  if(GPIO_ReadInputDataBit(AVOID2_GPIO_PORT,AVOID2_GPIO_PIN)==1 &&GPIO_ReadInputDataBit(AVOID0_GPIO_PORT,AVOID0_GPIO_PIN)==0&&GPIO_ReadInputDataBit(AVOID1_GPIO_PORT,AVOID1_GPIO_PIN)==0&&GPIO_ReadInputDataBit(AVOID3_GPIO_PORT,AVOID3_GPIO_PIN)==0&&GPIO_ReadInputDataBit(AVOID4_GPIO_PORT,AVOID4_GPIO_PIN)==0)
-//  {   
-//   if( pwm_index <  POINT_NUM)   
-//    { 
-//     period_cnt++;
-//     BRE_TIMx->BRE_CCRx = indexWave[pwm_index]; //根据PWM表修改定时器的比较寄存器值
-
-//     //每个PWM表中的每个元素使用period_class次
-//     if(period_cnt > period_class)         
-//     {    
-//      pwm_index++;            //标志PWM表指向下一个元素
-//      //若PWM表已到达结尾，重新指向表头
-//      period_cnt=0; 
-//			 //重置周期计数标志
-//			pwm_index1 = 0;		
-//     } 
-//    }
-//   }
-//	
-
-//	if(GPIO_ReadInputDataBit(AVOID2_GPIO_PORT,AVOID2_GPIO_PIN)==1 &&GPIO_ReadInputDataBit(AVOID0_GPIO_PORT,AVOID0_GPIO_PIN)==0&&GPIO_ReadInputDataBit(AVOID1_GPIO_PORT,AVOID1_GPIO_PIN)==0&&GPIO_ReadInputDataBit(AVOID3_GPIO_PORT,AVOID3_GPIO_PIN)==1&&GPIO_ReadInputDataBit(AVOID4_GPIO_PORT,AVOID4_GPIO_PIN)==0)
-//			{   
-//			if( pwm_index1 <  POINT_NUM1)   
-//				{ 
-//					period_cnt1++;
-//					BRE_TIMx->BRE_CCRx =off[pwm_index1]; //根据PWM表修改定时器的比较寄存器值
-//					//每个PWM表中的每个元素使用period_class次
-//					if(period_cnt1 > period_class)         
-//						{    
-//							pwm_index1++;            //标志PWM表指向下一个元素
-//							//若PWM表已到达结尾，重新指向表头
-//							period_cnt1=0;           //重置周期计数标志
-//							pwm_index = 0;
-//						} 
-//				}
-//			}
-
-//  TIM_ClearITPendingBit (BRE_TIMx, TIM_IT_Update); //必须要清除中断标志位
-// }
-//}
 
 
+extern __IO uint16_t key1;
+extern __IO uint16_t key2;
 
-extern __IO uint16_t Go_Scan;
-
-void EXTI0_IRQHandler(void)
+void KEY1_IRQHandler(void)
 {
-	if(EXTI_GetITStatus(EXTI_Line0) != RESET)
+  //确保是否产生了EXTI Line中断
+	if(EXTI_GetITStatus(KEY1_INT_EXTI_LINE) != RESET) 
 	{
-		EXTI0();	
-	}
-	EXTI_ClearITPendingBit(EXTI_Line0);
+		key1 = 100;  
+	}  
+	    //清除中断标志位
+		EXTI_ClearITPendingBit(KEY1_INT_EXTI_LINE); 
 }
 
-
-
-
-void EXTI15_10_IRQHandler(void)
+void KEY2_IRQHandler(void)
 {
-	if(EXTI_GetITStatus(EXTI_Line13) != RESET)
+  //确保是否产生了EXTI Line中断
+	if(EXTI_GetITStatus(KEY2_INT_EXTI_LINE) != RESET) 
 	{
-		EXTI13();
-	}
-	EXTI_ClearITPendingBit(EXTI_Line13);
+		key2 = 100; //按键2
+	}  		
+    //清除中断标志位
+		EXTI_ClearITPendingBit(KEY2_INT_EXTI_LINE);     
 }
-
 
 
  
