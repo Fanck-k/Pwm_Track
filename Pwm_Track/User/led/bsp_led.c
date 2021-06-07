@@ -127,8 +127,8 @@ void Turn_Left_Slow(void)
 
 void Turn_Right_Correct(void)
 {
-	Set_Left_Speed(560);
-	Set_Right_Speed(1000);
+	Set_Left_Speed(1000);
+	Set_Right_Speed(560);
 	WHEEL0_ON;
 	WHEEL1_OFF;
 	WHEEL2_ON;
@@ -137,8 +137,8 @@ void Turn_Right_Correct(void)
 
 void Turn_Left_Correct(void)
 {
-	Set_Left_Speed(1000);
-	Set_Right_Speed(560);
+	Set_Left_Speed(560);
+	Set_Right_Speed(1000);
 	WHEEL0_ON;
 	WHEEL1_OFF;
 	WHEEL2_ON;

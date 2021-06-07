@@ -28,19 +28,47 @@ void Track(void)
 		Delay_ms(1);
 		Go();
 		Delay_ms(1850);
-				key2 = 0;
+		key2 = 0;
 	}
 	
 	
-	//直行 L4
-	//只有中间检测到黑线，直行
-	if(L1==0 && L2==0 && L3==0 && L4==1 && L5==0 && L6==0 && L7==0)
+	//直行
+	if(D)
 	{
-			Delay_ms(1);
-			Go();
-			//Delay_ms(700);
+		Delay_ms(1);
+		Go();
+		//Delay_ms(700);
 	}
 	
+	
+	
+	//左转
+	else if(L)
+	{
+		Delay_ms(1);
+		Turn_Left_Slow();
+	}
+	
+	//右转
+	else if(R)
+	{
+		Delay_ms(1);
+		Turn_Right_Slow();
+	}
+	
+	//左纠正
+	else if(LCorrect)
+	{
+		Delay_ms(1);
+		Turn_Left_Correct();
+	}
+	
+	//右纠正
+	else if(RCorrect)
+	{
+		Delay_ms(1);
+		Turn_Right_Correct();		
+	}
 	
 	else
 	{
