@@ -85,8 +85,8 @@ void WHEEL_GPIO_Config(void)
 
 void Go(void)
 {
-	Set_Left_Speed(500);
-	Set_Right_Speed(560);
+	Set_Left_Speed(350);
+	Set_Right_Speed(350);
 	WHEEL0_ON;
 	WHEEL1_OFF;
 	WHEEL2_ON;
@@ -105,7 +105,7 @@ void Go(void)
 
 void Turn_Right_Slow(void)
 {
-	Set_Left_Speed(300);
+	Set_Left_Speed(1000);
 	Set_Right_Speed(300);
 	WHEEL0_ON;
 	WHEEL1_OFF;
@@ -116,7 +116,7 @@ void Turn_Right_Slow(void)
 
 void Turn_Left_Slow(void)
 {
-	Set_Left_Speed(300);
+	Set_Left_Speed(1000);
 	Set_Right_Speed(300);
 	WHEEL0_OFF;
 	WHEEL1_OFF;
@@ -128,7 +128,7 @@ void Turn_Left_Slow(void)
 void Turn_Right_Correct(void)
 {
 	Set_Left_Speed(1000);
-	Set_Right_Speed(560);
+	Set_Right_Speed(410);
 	WHEEL0_ON;
 	WHEEL1_OFF;
 	WHEEL2_ON;
@@ -137,7 +137,7 @@ void Turn_Right_Correct(void)
 
 void Turn_Left_Correct(void)
 {
-	Set_Left_Speed(560);
+	Set_Left_Speed(410);
 	Set_Right_Speed(1000);
 	WHEEL0_ON;
 	WHEEL1_OFF;

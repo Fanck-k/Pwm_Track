@@ -47,6 +47,7 @@ void Track(void)
 	{
 		Delay_ms(1);
 		Turn_Left_Slow();
+		
 	}
 	
 	//ÓÒ×ª
@@ -54,6 +55,7 @@ void Track(void)
 	{
 		Delay_ms(1);
 		Turn_Right_Slow();
+		
 	}
 	
 	//×ó¾ÀÕý
@@ -70,9 +72,22 @@ void Track(void)
 		Turn_Right_Correct();		
 	}
 	
+//	else if(S)
+//	{
+//		Delay_ms(1);
+//		Go();
+//	}
+	
+	
+	else if(S)
+	{
+		Delay_ms(1);
+		Stop();
+	}
 	else
 	{
-		Stop();
+		Delay_ms(1);
+		Go();
 	}
 
 
